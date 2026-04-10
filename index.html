@@ -54,6 +54,23 @@ section{padding:52px 5%}
 
 /* ── HERO ── */
 #hero-section{min-height:calc(100vh - 68px);background-color:var(--navy);position:relative;display:flex;align-items:center;overflow:hidden}
+  #hero-section::before{
+  content:"";
+  position:absolute;
+  inset:0;
+
+  background: url('your-image.png') no-repeat center;
+  background-size: contain;
+
+  opacity:0.12;
+  z-index:1;
+  }
+  .dots-bg{ opacity:0.2; }
+.mandala{ opacity:0.03; }
+  .hero-content{
+  position:relative;
+  z-index:2;
+  }
 .dots-bg{position:absolute;inset:0;background-image:radial-gradient(circle,rgba(255,107,0,.15) 1px,transparent 1px);background-size:40px 40px;animation:drift 20s ease-in-out infinite alternate}
 @keyframes drift{from{background-position:0 0}to{background-position:20px 20px}}
 .mandala{position:absolute;right:-60px;top:50%;transform:translateY(-50%);width:580px;height:580px;opacity:.07;animation:spin 70s linear infinite}
