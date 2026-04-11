@@ -866,16 +866,41 @@ function toast(msg,dur=3500){
 
 // ── FORM SUBMIT ──
 function submitForm(){
-  const n=document.getElementById("sname").value.trim();
-  const m=document.getElementById("mobile").value.trim();
-  const c=document.getElementById("classLevel").value;
-  if(!n){toast("⚠️ Please enter student name.");return}
-  if(!m||m.length<10){toast("⚠️ Please enter a valid mobile number.");return}
-  if(!c){toast("⚠️ Please select your class/level.");return}
-  toast(`🎉 Thank you, ${n}! We'll call you at ${m} to confirm your Free Demo Class!`,5000);
-  ["sname","fname","mobile","classLevel","batch","school","msg"].forEach(id=>{
-    const el=document.getElementById(id);if(el)el.value="";
+  const sname = document.getElementById("sname").value.trim();
+  const fname = document.getElementById("fname").value.trim();
+  const mobile = document.getElementById("mobile").value.trim();
+  const classLevel = document.getElementById("classLevel").value;
+  const batch = document.getElementById("batch").value;
+  const school = document.getElementById("school").value.trim();
+  const msg = document.getElementById("msg").value.trim();
+
+  if(!sname){ toast("⚠️ Please enter student name."); return; }
+  if(!fname){ toast("⚠️ Please enter father's name."); return; }
+  if(!mobile || mobile.length < 10){ toast("⚠️ Please enter a valid mobile number."); return; }
+  if(!classLevel){ toast("⚠️ Please select class/level."); return; }
+
+  let whatsappText = `*New Enquiry - IMS Coaching Classes*%0A%0A`;
+  whatsappText += `👤 *Student Name:* ${encodeURIComponent(sname)}%0A`;
+  whatsappText += `👨 *Father's Name:* ${encodeURIComponent(fname)}%0A`;
+  whatsappText += `📞 *Mobile:* ${encodeURIComponent(mobile)}%0A`;
+  whatsappText += `📚 *Class/Level:* ${encodeURIComponent(classLevel)}%0A`;
+  if(batch) whatsappText += `⏰ *Preferred Batch:* ${encodeURIComponent(batch)}%0A`;
+  if(school) whatsappText += `🏫 *Current School:* ${encodeURIComponent(school)}%0A`;
+  if(msg) whatsappText += `💬 *Message:* ${encodeURIComponent(msg)}%0A`;
+  whatsappText += `%0A_This enquiry was submitted via imscoaching.in_`;
+
+  const phone = '918810357248';
+  const waLink = `https://wa.me/${phone}?text=${whatsappText}`;
+
+  window.open(waLink, '_blank');
+  toast(`✅ Enquiry sent to WhatsApp! We'll contact you soon.`, 4000);
+
+  ["sname","fname","mobile","classLevel","batch","school","msg"].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.value = "";
   });
+  document.getElementById("classLevel").selectedIndex = 0;
+  document.getElementById("batch").selectedIndex = 0;
 }
 
 // ── PDF FILTER ──
