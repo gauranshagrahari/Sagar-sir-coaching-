@@ -389,7 +389,7 @@ footer{background:var(--deep-navy);border-top:3px solid var(--saffron);padding:5
   </div>
 </section>
 
-  <!-- Enhanced Image Gallery Section - 22 Portrait Images Auto-scrolling Coverflow Carousel -->
+<!-- Fixed Image Gallery Section - No Image Cropping -->
 <!-- Place this code just below your hero section -->
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
 <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
@@ -398,107 +398,138 @@ footer{background:var(--deep-navy);border-top:3px solid var(--saffron);padding:5
   /* Gallery Section Container */
   .gallery-section {
     width: 100%;
-    padding: 60px 0;
+    padding: 50px 0;
     background: #f9f9f9;
     overflow: hidden;
   }
 
-  /* Swiper main container */
+  /* Swiper main container - ADDED PADDING FOR SCALED IMAGES */
   .swiper {
     width: 100%;
-    padding: 20px 0 50px;
+    padding: 30px 0 40px;  /* Top and bottom padding prevents cropping */
     cursor: grab;
+    overflow: visible !important;  /* Allow scaled images to overflow */
   }
   
   .swiper:active {
     cursor: grabbing;
   }
 
+  /* Swiper wrapper - allow overflow */
+  .swiper-wrapper {
+    align-items: center;  /* Center slides vertically */
+  }
+
   /* Each slide - portrait oriented */
   .swiper-slide {
-    width: 320px;
-    height: 520px;
+    width: 250px;
+    height: 400px;
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    opacity: 0.6;
+    transition: transform 0.4s ease-out;
+    will-change: transform;
+    overflow: visible !important;  /* Prevent cropping */
   }
 
-  /* Active center slide gets full opacity */
-  .swiper-slide-active {
-    opacity: 1 !important;
-  }
-
-  /* Images inside slides with enhanced transitions */
+  /* Images inside slides */
   .swiper-slide img {
     display: block;
     width: 100%;
     height: 100%;
-    object-fit: cover;
-    border-radius: 20px;
-    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
-    transition: all 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-    filter: brightness(0.85);
+    object-fit: contain;  /* CHANGED from 'cover' to 'contain' - prevents cropping */
+    border-radius: 16px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transition: all 0.4s ease-out;
+    pointer-events: none;
+    -webkit-user-drag: none;
+    user-select: none;
+    background: transparent;  /* Transparent background for letterboxing */
   }
 
-  /* Center slide image gets enhanced styling */
+  /* Center slide image gets enhanced styling and scaling */
   .swiper-slide-active img {
-    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+    transform: scale(1.15);
+    opacity: 1;
     filter: brightness(1.05);
-    transform: scale(1);
+    z-index: 2;
+    position: relative;
   }
 
-  /* Non-active slides have slight desaturation for better focus effect */
+  /* Non-active slides styling */
   .swiper-slide:not(.swiper-slide-active) img {
-    filter: brightness(0.7) saturate(0.9);
+    transform: scale(0.85);
+    opacity: 0.7;
+    filter: brightness(0.8);
+    z-index: 1;
   }
 
-  /* Smooth fade animation on slide edges */
-  .swiper-slide-prev,
-  .swiper-slide-next {
-    opacity: 0.7;
+  /* Ensure scaled center image doesn't overlap navigation */
+  .swiper-slide {
+    transform: translateZ(0);  /* Hardware acceleration */
+    backface-visibility: hidden;  /* Prevent flickering */
   }
 
   /* Responsive adjustments */
   @media (max-width: 768px) {
     .swiper-slide {
-      width: 280px;
-      height: 450px;
-    }
-  }
-
-  @media (max-width: 480px) {
-    .swiper-slide {
-      width: 240px;
-      height: 400px;
+      width: 220px;
+      height: 350px;
     }
     
     .gallery-section {
       padding: 40px 0;
     }
+    
+    .swiper {
+      padding: 25px 0 35px;
+    }
   }
 
-  /* Optional gradient overlay for depth effect */
+  @media (max-width: 480px) {
+    .swiper-slide {
+      width: 180px;
+      height: 300px;
+    }
+    
+    .gallery-section {
+      padding: 30px 0;
+    }
+    
+    .swiper {
+      padding: 20px 0 30px;
+    }
+  }
+
+  /* Optional: Add subtle fade edges for depth */
   .swiper::before,
   .swiper::after {
     content: '';
     position: absolute;
     top: 0;
-    width: 150px;
+    width: 100px;
     height: 100%;
-    z-index: 2;
+    z-index: 3;
     pointer-events: none;
   }
 
   .swiper::before {
     left: 0;
-    background: linear-gradient(to right, rgba(249, 249, 249, 0.9), transparent);
+    background: linear-gradient(to right, rgba(249, 249, 249, 0.95), transparent);
   }
 
   .swiper::after {
     right: 0;
-    background: linear-gradient(to left, rgba(249, 249, 249, 0.9), transparent);
+    background: linear-gradient(to left, rgba(249, 249, 249, 0.95), transparent);
+  }
+
+  /* Hide gradients on mobile for cleaner look */
+  @media (max-width: 768px) {
+    .swiper::before,
+    .swiper::after {
+      width: 60px;
+    }
   }
 </style>
 
@@ -507,227 +538,133 @@ footer{background:var(--deep-navy);border-top:3px solid var(--saffron);padding:5
   <div class="swiper">
     <!-- Additional required wrapper -->
     <div class="swiper-wrapper">
+      
       <!-- 
         REPLACE THE src ATTRIBUTES BELOW WITH YOUR ACTUAL IMAGE ADDRESSES
-        You have these 22 images from your WhatsApp:
-        IMG-20260411-WA0015.jpg through IMG-20260411-WA0034.jpg (excluding duplicates)
-        
-        I've listed all 22 unique images based on your screenshots.
-        Simply replace each placeholder with your actual image path.
-        Example: src="images/IMG-20260411-WA0015.jpg" or src="IMG-20260411-WA0015.jpg"
+        Make sure your images are optimized for web (recommended: max 1200px height)
       -->
       
-      <!-- Image 1 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0015.jpg" alt="Gallery Image 1" loading="lazy">
-      </div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0015.jpg" alt="Image 1" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0016.jpg" alt="Image 2" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0017.jpg" alt="Image 3" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0018.jpg" alt="Image 4" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0019.jpg" alt="Image 5" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0020.jpg" alt="Image 6" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0021.jpg" alt="Image 7" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0022.jpg" alt="Image 8" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0023.jpg" alt="Image 9" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0024.jpg" alt="Image 10" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0025.jpg" alt="Image 11" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0026.jpg" alt="Image 12" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0027.jpg" alt="Image 13" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0028.jpg" alt="Image 14" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0029.jpg" alt="Image 15" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0030.jpg" alt="Image 16" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0031.jpg" alt="Image 17" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0032.jpg" alt="Image 18" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0033.jpg" alt="Image 19" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0034.jpg" alt="Image 20" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0013.jpg" alt="Image 21" loading="lazy"></div>
+      <div class="swiper-slide"><img src="IMG-20260411-WA0014.jpg" alt="Image 22" loading="lazy"></div>
       
-      <!-- Image 2 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0016.jpg" alt="Gallery Image 2" loading="lazy">
-      </div>
-      
-      <!-- Image 3 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0017.jpg" alt="Gallery Image 3" loading="lazy">
-      </div>
-      
-      <!-- Image 4 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0018.jpg" alt="Gallery Image 4" loading="lazy">
-      </div>
-      
-      <!-- Image 5 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0019.jpg" alt="Gallery Image 5" loading="lazy">
-      </div>
-      
-      <!-- Image 6 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0020.jpg" alt="Gallery Image 6" loading="lazy">
-      </div>
-      
-      <!-- Image 7 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0021.jpg" alt="Gallery Image 7" loading="lazy">
-      </div>
-      
-      <!-- Image 8 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0022.jpg" alt="Gallery Image 8" loading="lazy">
-      </div>
-      
-      <!-- Image 9 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0023.jpg" alt="Gallery Image 9" loading="lazy">
-      </div>
-      
-      <!-- Image 10 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0024.jpg" alt="Gallery Image 10" loading="lazy">
-      </div>
-      
-      <!-- Image 11 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0025.jpg" alt="Gallery Image 11" loading="lazy">
-      </div>
-      
-      <!-- Image 12 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0026.jpg" alt="Gallery Image 12" loading="lazy">
-      </div>
-      
-      <!-- Image 13 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0027.jpg" alt="Gallery Image 13" loading="lazy">
-      </div>
-      
-      <!-- Image 14 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0028.jpg" alt="Gallery Image 14" loading="lazy">
-      </div>
-      
-      <!-- Image 15 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0029.jpg" alt="Gallery Image 15" loading="lazy">
-      </div>
-      
-      <!-- Image 16 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0030.jpg" alt="Gallery Image 16" loading="lazy">
-      </div>
-      
-      <!-- Image 17 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0031.jpg" alt="Gallery Image 17" loading="lazy">
-      </div>
-      
-      <!-- Image 18 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0032.jpg" alt="Gallery Image 18" loading="lazy">
-      </div>
-      
-      <!-- Image 19 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0033.jpg" alt="Gallery Image 19" loading="lazy">
-      </div>
-      
-      <!-- Image 20 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0034.jpg" alt="Gallery Image 20" loading="lazy">
-      </div>
-      
-      <!-- Image 21 - WA0013 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0013.jpg" alt="Gallery Image 21" loading="lazy">
-      </div>
-      
-      <!-- Image 22 - WA0014 -->
-      <div class="swiper-slide">
-        <img src="IMG-20260411-WA0014.jpg" alt="Gallery Image 22" loading="lazy">
-      </div>
     </div>
   </div>
 </section>
 
 <script>
   (function() {
-    // Initialize Swiper with enhanced coverflow effect and faster autoplay
-    const swiper = new Swiper('.swiper', {
-      effect: 'coverflow',
-      grabCursor: true,
-      centeredSlides: true,
-      slidesPerView: 'auto',
-      loop: true,
-      loopAdditionalSlides: 5,     // Increased for smoother loop with 22 images
+    window.addEventListener('load', function() {
       
-      // FASTER SPEED
-      speed: 500,                  // Fast transitions
-      autoplay: {
-        delay: 1800,               // Auto-scroll every 1.8 seconds
-        disableOnInteraction: false,
-        pauseOnMouseEnter: true,
-      },
-      
-      // Enhanced Coverflow configuration
-      coverflowEffect: {
-        rotate: 0,
-        stretch: -20,              // Tight grouping
-        depth: 250,                // Dramatic depth
-        modifier: 1.2,             // Smooth scaling
-        slideShadows: false,
-        scale: 0.68,               // Side images are 68% of center size
-      },
-      
-      // Smooth easing function
-      easing: 'ease-out',
-      
-      // Space between slides
-      spaceBetween: 10,
-      
-      // Enable keyboard navigation
-      keyboard: {
-        enabled: true,
-        onlyInViewport: true,
-      },
-      
-      // Performance optimizations
-      watchSlidesProgress: true,
-      preventClicks: true,
-      preventClicksPropagation: true,
-      
-      // Preload images for smoother experience
-      preloadImages: true,
-      updateOnImagesReady: true,
-      
-      // Use transform for better performance
-      useCSS3Transforms: true,
-      
-      // Observer for dynamic content
-      observer: true,
-      observeParents: true,
-      
-      // Touch settings for better mobile experience
-      touchRatio: 0.8,
-      touchAngle: 45,
-      resistance: true,
-      resistanceRatio: 0.85,
-    });
-
-    // Optional: Add smooth parallax effect on mouse move (desktop only)
-    if (window.innerWidth > 768) {
-      const swiperEl = document.querySelector('.swiper');
-      let mouseX = 0;
-      let targetX = 0;
-      
-      swiperEl.addEventListener('mousemove', (e) => {
-        const rect = swiperEl.getBoundingClientRect();
-        mouseX = (e.clientX - rect.left) / rect.width - 0.5;
+      const swiper = new Swiper('.swiper', {
+        effect: 'slide',
+        grabCursor: true,
+        centeredSlides: true,
+        slidesPerView: 'auto',
+        loop: true,
+        loopedSlides: 22,
+        speed: 600,
+        
+        autoplay: {
+          delay: 2000,
+          disableOnInteraction: false,
+          pauseOnMouseEnter: true,
+          waitForTransition: true,
+        },
+        
+        spaceBetween: 20,  // Increased spacing for scaled images
+        
+        // Disable features for performance
+        keyboard: false,
+        pagination: false,
+        navigation: false,
+        scrollbar: false,
+        
+        // Performance
+        watchSlidesProgress: false,
+        preventClicks: true,
+        useCSS3Transforms: true,
+        resistance: false,
+        observer: false,
+        observeParents: false,
+        
+        // Custom slide change handling for smooth scaling
+        on: {
+          init: function() {
+            updateSlideStyles.call(this);
+          },
+          slideChangeTransitionStart: function() {
+            updateSlideStyles.call(this);
+          },
+          slideChangeTransitionEnd: function() {
+            updateSlideStyles.call(this);
+          },
+          resize: function() {
+            updateSlideStyles.call(this);
+          }
+        },
       });
       
-      function animate() {
-        targetX += (mouseX - targetX) * 0.05;
-        const activeSlide = document.querySelector('.swiper-slide-active img');
-        if (activeSlide) {
-          activeSlide.style.transform = `scale(1) translateX(${targetX * 10}px)`;
-        }
-        requestAnimationFrame(animate);
+      function updateSlideStyles() {
+        const slides = document.querySelectorAll('.swiper-slide');
+        
+        slides.forEach((slide) => {
+          const img = slide.querySelector('img');
+          if (!img) return;
+          
+          // Apply base transitions
+          img.style.transition = 'all 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+          
+          if (slide.classList.contains('swiper-slide-active')) {
+            // Center slide - full size
+            img.style.transform = 'scale(1)';
+            img.style.opacity = '1';
+            img.style.filter = 'brightness(1.05)';
+            img.style.zIndex = '2';
+          } else {
+            // Side slides - smaller
+            img.style.transform = 'scale(0.8)';
+            img.style.opacity = '0.65';
+            img.style.filter = 'brightness(0.75)';
+            img.style.zIndex = '1';
+          }
+        });
       }
       
-      animate();
-    }
-
-    // Pause on hover with smooth transition
-    const swiperContainer = document.querySelector('.swiper');
-    swiperContainer.addEventListener('mouseenter', () => {
-      swiper.autoplay.stop();
+      // Initial style application
+      setTimeout(updateSlideStyles, 100);
+      
+      // Pause on hover
+      const swiperContainer = document.querySelector('.swiper');
+      swiperContainer.addEventListener('mouseenter', () => {
+        swiper.autoplay.stop();
+      });
+      
+      swiperContainer.addEventListener('mouseleave', () => {
+        swiper.autoplay.start();
+      });
+      
+      console.log('✅ Gallery fixed - Images no longer cropped!');
     });
-    
-    swiperContainer.addEventListener('mouseleave', () => {
-      swiper.autoplay.start();
-    });
-
-    console.log('✨ Gallery Carousel initialized with 22 images - faster speed and smooth animations');
   })();
 </script>
   
