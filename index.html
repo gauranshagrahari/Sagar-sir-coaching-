@@ -107,7 +107,17 @@ section{padding:52px 5%}
 .feat-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:24px}
 .feat-item{display:flex;align-items:center;gap:9px;font-size:13.5px;font-weight:500;color:var(--navy)}
 .feat-icon{width:30px;height:30px;border-radius:7px;flex-shrink:0;background:linear-gradient(135deg,rgba(255,107,0,.1),rgba(244,196,48,.1));border:1px solid rgba(255,107,0,.22);display:flex;align-items:center;justify-content:center;font-size:15px}
-
+.about-img {
+    position: relative;
+    overflow: hidden;
+    border-radius: 20px;
+}
+.about-img img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
 /* ── COURSES ── */
 #courses{background:var(--cream)}
 .courses-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:24px}
@@ -671,35 +681,34 @@ footer{background:var(--deep-navy);border-top:3px solid var(--saffron);padding:5
     <div class="about-grid">
         <div class="about-img">
             <img src="file_0000000062dc71faa1ca67779593f026.png" alt="Teaching icon">
+            <div class="about-badge">
+                <span class="big">11+</span> Years of<br>Teaching
+            </div>
         </div>
-        <div class="about-badge">
-            <span class="big">11+</span> Years of<br>Teaching
+        <div class="about-text">
+            <div class="eyebrow">About Us</div>
+            <h2>Shaping <span>Bright Futures</span><br>in Gorakhpur</h2>
+            <p>
+                IMS Coaching Classes was founded with one clear mission — to provide world-class academic coaching to students of Gorakhpur at an affordable price.
+            </p>
+            <p>
+                Under the expert guidance of <strong>Sagar Srivastav Sir</strong> — a B.Tech graduate in Electronics &amp; Communication — thousands of students have achieved their academic goals. Sir's deep subject knowledge combined with a genuine passion for teaching makes every class impactful and engaging.
+            </p>
+            <p>
+                From Class 6 foundations all the way to competitive entrance exams, we ensure every student gets the attention, resources, and motivation they deserve.
+            </p>
+            <div class="feat-grid">
+                <div class="feat-item"><div class="feat-icon">📖</div>Daily Practice Sheets</div>
+                <div class="feat-item"><div class="feat-icon">🎯</div>Target-Based Learning</div>
+                <div class="feat-item"><div class="feat-icon">📊</div>Weekly Tests &amp; Reports</div>
+                <div class="feat-item"><div class="feat-icon">💬</div>Doubt-Clearing Sessions</div>
+                <div class="feat-item"><div class="feat-icon">📱</div>WhatsApp Study Groups</div>
+                <div class="feat-item"><div class="feat-icon">📹</div>YouTube Free Lectures</div>
+                <div class="feat-item"><div class="feat-icon">📄</div>PDF Study Material</div>
+                <div class="feat-item"><div class="feat-icon">👨‍👩‍👧</div>Parent–Teacher Meets</div>
+            </div>
         </div>
     </div>
-    <div class="about-text">
-      <div class="eyebrow">About Us</div>
-      <h2>Shaping <span>Bright Futures</span><br>in Gorakhpur</h2>
-      <p>
-      IMS Coaching Classes was founded with one clear mission — to provide world-class academic coaching to students of Gorakhpur at an affordable price.
-      </p>
-      <p>
-        Under the expert guidance of <strong>Sagar Srivastav Sir</strong> — a B.Tech graduate in Electronics &amp; Communication — thousands of students have achieved their academic goals. Sir's deep subject knowledge combined with a genuine passion for teaching makes every class impactful and engaging.
-      </p>
-      <p>
-        From Class 6 foundations all the way to competitive entrance exams, we ensure every student gets the attention, resources, and motivation they deserve.
-      </p>
-      <div class="feat-grid">
-        <div class="feat-item"><div class="feat-icon">📖</div>Daily Practice Sheets</div>
-        <div class="feat-item"><div class="feat-icon">🎯</div>Target-Based Learning</div>
-        <div class="feat-item"><div class="feat-icon">📊</div>Weekly Tests &amp; Reports</div>
-        <div class="feat-item"><div class="feat-icon">💬</div>Doubt-Clearing Sessions</div>
-        <div class="feat-item"><div class="feat-icon">📱</div>WhatsApp Study Groups</div>
-        <div class="feat-item"><div class="feat-icon">📹</div>YouTube Free Lectures</div>
-        <div class="feat-item"><div class="feat-icon">📄</div>PDF Study Material</div>
-        <div class="feat-item"><div class="feat-icon">👨‍👩‍👧</div>Parent–Teacher Meets</div>
-      </div>
-    </div>
-  </div>
 </section>
 
 <!-- COURSES -->
