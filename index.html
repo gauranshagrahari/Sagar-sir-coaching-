@@ -324,7 +324,6 @@ footer{background:var(--deep-navy);border-top:3px solid var(--saffron);padding:5
   <a onclick="showPage('home');closeMobileNav()">Home</a>
   <a onclick="scrollTo_('#about');closeMobileNav()">About</a>
   <a onclick="scrollTo_('#courses');closeMobileNav()">Courses</a>
-  <a onclick="showPage('gallery');closeMobileNav()">Gallery</a>
   <a onclick="showPage('materials');closeMobileNav()">Study Material</a>
   <a onclick="showPage('policies');closeMobileNav()">Policies</a>
   <a onclick="scrollTo_('#map-section');closeMobileNav()">Location</a>
@@ -669,11 +668,57 @@ footer{background:var(--deep-navy);border-top:3px solid var(--saffron);padding:5
 </script>
   
 <!-- ABOUT -->
+  <style>
+    #about {
+        padding: 2rem;
+        background: #f8f9fa;
+    }
+    .about-grid {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+        max-width: 1200px;
+        margin: 0 auto;
+    }
+    .about-img {
+        flex: 1;
+    }
+    .about-img img {
+        width: 100%;
+        max-width: 400px;
+        height: auto;
+        border-radius: 12px;
+        display: block;
+    }
+    .about-badge {
+        flex: 1;
+        background: white;
+        padding: 2rem;
+        border-radius: 20px;
+        box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+        text-align: center;
+        font-size: 1.2rem;
+    }
+    .big {
+        font-size: 3rem;
+        font-weight: bold;
+        display: block;
+        line-height: 1;
+    }
+    @media (max-width: 768px) {
+        .about-grid { flex-direction: column; }
+    }
+</style>
+
+<!-- ABOUT -->
 <section id="about">
-  <div class="about-grid">
-    <div class="about-img">
-      <span>👨‍🏫</span>
-      <div class="about-badge"><span class="big">11+</span>Years of<br>Teaching</div>
+    <div class="about-grid">
+        <div class="about-img">
+            <img src="file_0000000062dc71faa1ca67779593f026.png" alt="Teaching icon">
+        </div>
+        <div class="about-badge">
+            <span class="big">11+</span> Years of<br>Teaching
+        </div>
     </div>
     <div class="about-text">
       <div class="eyebrow">About Us</div>
@@ -895,37 +940,7 @@ Learn coding through practical examples, clear concepts, and exam-oriented prepa
 </div><!-- end home-page -->
 
 
-<!-- ════════════════════════════════════
-     GALLERY PAGE
-════════════════════════════════════ -->
-<div class="page" id="gallery-page">
-  <div class="gallery-hero">
-    <div class="gallery-hero-inner">
-      <div class="eyebrow" style="color:var(--gold)">Our Moments</div>
-      <h2 style="font-family:'Plus Jakarta Sans',sans-serif;font-size:clamp(28px,5vw,44px);font-weight:800;color:#fff;margin-bottom:12px">Institute Gallery</h2>
-      <p style="color:var(--text-light);font-size:15px;max-width:500px;margin:0 auto">Classrooms, events, results celebrations &amp; student life at SS Study Point</p>
-    </div>
-  </div>
-  <div class="gallery-upload-note">
-    <div class="note-icon">📌</div>
-    <p><strong>Note for Admin:</strong> Replace the placeholder boxes below with your actual photos. Each box represents one image slot — simply update the <code>src</code> of the <code>&lt;img&gt;</code> tags or add images via your web host / CMS. Recommended size: <strong>800×600px</strong>.</p>
-  </div>
-  <div class="gallery-grid" id="galleryGrid">
-    <!-- Placeholders — replace src="" with actual image paths -->
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🏫</div><div class="ph-text">Classroom Photo 1<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🏆</div><div class="ph-text">Results Celebration<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">👨‍🏫</div><div class="ph-text">Faculty Photo<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">📚</div><div class="ph-text">Study Session<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🎓</div><div class="ph-text">Student Achievement<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🎉</div><div class="ph-text">Annual Function<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">✍️</div><div class="ph-text">Exam / Test Session<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🏅</div><div class="ph-text">Award Ceremony<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">📝</div><div class="ph-text">Whiteboard Session<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🌟</div><div class="ph-text">Topper Felicitation<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">🏛️</div><div class="ph-text">Institute Exterior<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-    <div class="gallery-item"><div class="gallery-placeholder"><div class="ph-icon">📸</div><div class="ph-text">Group Photo<br><span style="font-size:10px;opacity:.7">Upload your image here</span></div></div></div>
-  </div>
-</div>
+
 
 <!-- ════════════════════════════════════
      STUDY MATERIAL / PDF PAGE
